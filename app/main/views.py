@@ -9,3 +9,15 @@ def index():
     general_news = get_article('general')
     return render_template('index.html', title = title, sources = sources, general_news = general_news)
 
+
+@main.route('/sources/<id>')
+def sources_route(id):
+    title = id
+    source_data = get_article_source(id)
+    sources = get_sources()
+    news_source = None
+    for source in sources:
+        if source.id == id:
+            news_source = source
+
+    return render_template('sources.html',title=title, news_source = news_source, source_data = source_data)
