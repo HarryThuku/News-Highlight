@@ -1,0 +1,22 @@
+.news {
+    overflow: hidden;
+    height: 20px;
+}
+
+.news p:hover {
+    animation-play-state: paused
+}
+
+@keyframes news {
+    from {
+        transform: translateX(10%);
+    }
+    to {
+        transform: translateX(-200%)
+    }
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(12, 80, 149)
+}
