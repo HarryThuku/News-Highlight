@@ -21,3 +21,33 @@ def configure_requests(app):
     search_url = app.config['SEARCH_URL']
 
 
+
+def get_sources():
+    '''
+    '''
+    
+    url = sources_url.format(api_key)
+    with urllib.request.urlopen(url, context=context) as response:
+        data = response.read()
+        data = json.loads(data)
+
+        sources = []
+
+        if data['sources']:
+            sources_list = data['sources']
+            sources = process_sources(sources_list)
+    return sources
+
+def search_news(keyword):
+        url = search_url.format(keyword,api_key)
+        '''
+        '''
+        with urllib.request.urlopen(url, context=context) as response:
+                data = json.loads(response.read())
+
+                articles = []
+
+                if data['articles']:
+                        article_list = data['articles']
+                        articles = process_articles(article_list)
+        return articles
