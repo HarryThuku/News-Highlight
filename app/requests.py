@@ -51,3 +51,40 @@ def search_news(keyword):
                         article_list = data['articles']
                         articles = process_articles(article_list)
         return articles
+
+
+
+def process_sources(source_list):
+    '''
+    '''
+    sources = []
+    for source in source_list:
+        id = source.get('id')
+        name = source.get('name')
+        description = source.get('description')
+        url = source.get('url')
+        category = source.get('category')
+        language = source.get('language')
+        country = source.get('country')
+
+        if language =='en':
+
+            news_source = Source( id, name, description, url, category, language, country )
+            sources.append(news_source)
+    return sources
+
+
+def get_article(category):
+    '''
+    '''
+
+    url = top_headlines_url.format(category, api_key)
+    with urllib.request.urlopen(url, context=context) as response:
+        data = json.loads(response.read())
+
+        articles = []
+
+        if data['articles']:
+                article_list = data['articles']
+                articles = process_articles(article_list)
+    return articles
