@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+<style>
+.news {
+    overflow: hidden;
+    height: 20px;
+}
+.label{
+    position: relative;
+    animation: news 100s infinite linear forwards;
+    white-space: nowrap; 
+} 
+.news p:hover {
+    animation-play-state: paused;
+}
+@-webkit-keyframes news{
+    from{
+        transform: translateX(10%) ;
+    }
+    to{
+        transform: translate(-200%)
+    }
+}
+@keyframes news {
+    from {
+        transform: translateX(10%);
+    }
+    to {
+        transform: translateX(-200%)
+    }
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(12, 80, 149)
+}
+</style>
+<br>
+<p style="text-align:center"><u>Read from a selected <i>source?</i></u></p><hr>
+<div class="news mx-5 my-2">
+    <p class="label">
+        {% for source in sources %}
+        <a class="px-4" href="/sources/{{source.id}}">
+            <em>{{source.name}}</em>
+        </a>
+        {% endfor %}
+    </p>
+</div>
+<br>
+<hr>
+
+<h3 style="text-align: center"><span>Top</span><span style="color:brown"> Headlines!</span></h3>
+<hr>
+<div class="container">
+    <div class="row">
+        {% for article in general_news %}
+            <div class="card" style='width: 350px; margin:10px;'>
+                <img style="width: 100%" src="{{article.urlToImage}}" alt="{{article.source['name']}}" class="card-img-top">
+                <div class="card-body">
+                    <span class="card-title"><a href="{{article.url}}">{{article.title | truncate(50)}}</a></span>
+                    <hr>
+                    <h5 class="card-title">Published at: {{article.publishedAt}}</h5>
+                    <hr>
+                    
+                    {% if article.author %}
+                        <h5 class="card-title">Author : <a href="{{article.url}}">{{article.author}}</a></h5>
+                        <hr>
+                    {% endif %}
+                    
+                    {% if article.content%}
+                        <p>{{article.content}}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a class='btn' style="width:100%" href="{{article.url}}" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
