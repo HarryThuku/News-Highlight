@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .card-header,
+        .card-body,
+        .card-footer{
+            text-align: center!important;
+        }
+    </style>
+    <div class="card">
+        <div class="card-header">
+            {{news_source.name}}
+        </div>
+        <div class="card-body">
+            {{news_source.description}}
+        </div>
+        <div class="card-footer">
+            <a href="{{news_source.url}}" class="btn">Visit Home Page</a>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for news in source_data %}
+            <div class="card" style='width: 350px; margin:10px;'>
+                <img style="width: 100%" src="{{news.urlToImage}}" alt="{{news.source['name']}}" class="card-img-top">
+                <div class="card-body">
+                    <span class="card-title"><a href="{{news.url}}">{{news.title | truncate(50)}}</a></span>
+                    <hr>
+                    <h5 class="card-title">Published at: {{news.publishedAt}}</h5>
+                    <hr>                    
+                    {% if news.content%}
+                        <p>{{news.content}}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a class='btn' style="width:100%" href="{{news.url}}" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
