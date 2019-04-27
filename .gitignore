@@ -1,0 +1,24 @@
+# this is my virtual environment
+/harry 
+
+# this contains my apikey and my secret key.
+start.sh
+
+# This contains vs configurations for my project. not necessary for the application to run.
+./vscode
+
+# the ones bellow this are not neccessary for the application to run.
+/__pycache__
+app/main/__pycache__/errors.cpython-37.pyc
+.idea/News-Highlights.iml
+.idea/misc.xml
+.idea/dictionaries/harry.xml
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/modules.xml
+app/__pycache__/__init__.cpython-37.pyc
+app/__pycache__/models.cpython-37.pyc
+app/__pycache__/requests.cpython-37.pyc
+app/main/__pycache__/__init__.cpython-37.pyc
+app/main/__pycache__/views.cpython-37.pyc
+.vscode/settings.json
