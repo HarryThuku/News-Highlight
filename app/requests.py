@@ -88,3 +88,40 @@ def get_article(category):
                 article_list = data['articles']
                 articles = process_articles(article_list)
     return articles
+
+
+def get_article_source(sources):
+    '''
+    '''
+
+    url = news_by_sources.format(sources, api_key)
+    with urllib.request.urlopen(url, context=context) as response:
+        data = json.loads(response.read())
+
+        articles = []
+
+        if data['articles']:
+                article_list = data['articles']
+                articles = process_articles(article_list)
+    return articles
+
+def process_articles(article_list):
+    '''
+    '''
+
+    articles = []
+    for article in article_list:
+        source = article.get('source')
+        author = article.get('author')
+        title = article.get('title')
+        description = article.get('description')
+        url = article.get('url')
+        urlToImage = article.get('urlToImage')
+        publishedAt = article.get('publishedAt')
+        content = article.get('content')
+
+        if urlToImage:
+
+            article_source = Article(source, author, title, description, url, urlToImage, publishedAt, content)
+            articles.append(article)
+    return articles
