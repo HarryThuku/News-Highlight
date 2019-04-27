@@ -21,3 +21,11 @@ def sources_route(id):
             news_source = source
 
     return render_template('sources.html',title=title, news_source = news_source, source_data = source_data)
+
+
+
+@main.route('/search/<key_word>')
+def sources_search(key_word):
+    searched_news = search_news(key_word)
+    title = f'search results for {key_word}'
+    return render_template('search.html',title=title, articles = search_news)
